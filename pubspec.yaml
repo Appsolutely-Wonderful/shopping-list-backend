@@ -1,0 +1,4 @@
+name: ShoppingListBackend
+dependencies:
+  json_serializable: ^3.5.1
+  build_runner: ^1.11.0
