@@ -42,10 +42,13 @@ Represents an individual item for the shopping list
 
 #### Methods
 
-| Method                | Description
-| -------------         | -----------
-| **getCost()**         | Total cost of the item. Price * Quantity
-| **isChecked()**       | Checks if the item has been checked off the list
-| **check()**           | Checks an item off the list
-| **toJson()**          | Serializes the product into a Map object
-| **fromJson(jsonMap)** | Creates an instance of the project based on a json map
+| Method                  | Description
+| -------------           | -----------
+| **getCost()**           | Total cost of the item. Price * Quantity
+| **isChecked()**         | Checks if the item has been checked off the list
+| **check()**             | Checks an item off the list
+| **addCategory(str)**    | Adds a category to the product
+| **removeCategory(str)** | Removes this category from the list
+| **getCategories()**     | Retrieves the list of categories on the product
+| **toJson()**            | Serializes the product into a Map object
+| **fromJson(jsonMap)**   | Creates an instance of the project based on a json map
