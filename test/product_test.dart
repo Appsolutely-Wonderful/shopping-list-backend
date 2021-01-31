@@ -5,12 +5,13 @@ import 'package:test/test.dart';
 
 void main() {
   test('Product can be initialized', () {
-    Product newProduct =
-        Product(name: "product", quantity: 4, price: 1.0, recipe: "Test");
+    Product newProduct = Product(
+        name: "product", quantity: 4, price: 1.0, recipe: "Test", unit: "unit");
     expect(newProduct.name, "product");
     expect(newProduct.quantity, 4);
     expect(newProduct.price, 1.0);
     expect(newProduct.recipe, "Test");
+    expect(newProduct.unit, "unit");
   });
 
   test('Product.getCost() return the total product cost', () {
@@ -50,5 +51,6 @@ void main() {
     expect(reconstructedProduct.quantity, newProduct.quantity);
     expect(reconstructedProduct.price, newProduct.price);
     expect(reconstructedProduct.recipe, newProduct.recipe);
+    expect(reconstructedProduct.unit, newProduct.unit);
   });
 }

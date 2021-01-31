@@ -6,13 +6,14 @@ part 'product.g.dart';
 class Product {
   String name;
   String recipe;
+  String unit;
   int quantity;
   double price;
 
   bool _checked = false;
   List<String> _categories = [];
 
-  Product({this.name, this.quantity, this.price, this.recipe});
+  Product({this.name, this.recipe, this.unit, this.quantity, this.price});
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
