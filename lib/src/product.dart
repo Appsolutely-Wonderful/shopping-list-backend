@@ -4,11 +4,11 @@ part 'product.g.dart';
 
 @JsonSerializable(nullable: false)
 class Product {
-  String name;
-  String recipe;
-  String unit;
-  int quantity;
-  double price;
+  String name = "";
+  String recipe = "";
+  String unit = "";
+  int quantity = 1;
+  double price = 0.00;
 
   bool _checked = false;
   List<String> _categories = [];
@@ -40,4 +40,10 @@ class Product {
 
   /// Returns the list of categories on the item
   List<String> getCategories() => _categories;
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return quantity.toString() + " " + unit + " " + name;
+  }
 }
