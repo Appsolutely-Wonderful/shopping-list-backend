@@ -9,6 +9,7 @@ typedef ForEachCallback = void Function(Product item);
 class ShoppingList {
   String _name;
   List<Product> _items = [];
+  get length => _items.length;
 
   /// Used to track the current categories of items in the list
   Map<String, int> _categories = {};
@@ -41,7 +42,7 @@ class ShoppingList {
   Product getItem(int index) => _items.elementAt(index);
 
   /// Returns all categories in the list
-  List<String> getCategories() => _categories.keys;
+  List<String> getCategories() => _categories.keys.toList();
 
   /// Returns the total cost of all items in the list
   double getTotalCost() {
@@ -57,12 +58,17 @@ class ShoppingList {
   }
 
   Map<String, List<Product>> getItemsByCategory() {
-    Map<String, List<Product>> groups;
+    Map<String, List<Product>> groups = {};
     // Go through each item and add the items to a map where
     // the key is the category and associated list is the items in that
     // category.
     _items.forEach((Product item) {
       List<String> categories = item.getCategories();
+      // If there are no categorized on the item, make it
+      // uncategorized.
+      if (categories.length == 0) {
+        categories.add("Uncategorized");
+      }
       categories.forEach((String category) {
         if (groups.containsKey(category)) {
           groups[category].add(item);
@@ -75,22 +81,27 @@ class ShoppingList {
   }
 
   Map<String, List<Product>> getItemsByRecipe() {
-    Map<String, List<Product>> groups;
+    Map<String, List<Product>> groups = {};
     // Go through each item and add the items to a map where
     // the key is the category and associated list is the items in that
     // category.
     _items.forEach((Product item) {
-      if (groups.containsKey(item.recipe)) {
-        groups[item.recipe].add(item);
+      var recipe = item.recipe;
+      if (recipe == null) {
+        recipe = "No Recipe";
+      }
+      if (groups.containsKey(recipe)) {
+        groups[recipe].add(item);
       } else {
-        groups[item.recipe] = [item];
+        groups[recipe] = [item];
       }
     });
+    return groups;
   }
 
   /// Adds each category to the ongoing categories
   void _addCategoriesOrIncrementRefs(List<String> categories) {
-    _categories.forEach((String category, _) {
+    categories.forEach((String category) {
       // If there's no key in the category map
       // add it.
       if (!_isCategoryInList(category)) {
@@ -105,15 +116,13 @@ class ShoppingList {
   }
 
   void _removeCategoriesOrDecrementRefs(List<String> categories) {
-    _categories.forEach((String category, _) {
+    categories.forEach((String category) {
       // This function is only called when removing items from the list
       // So the key should always be in the map.
       assert(_categories.containsKey(category));
       _decrementCategoryRefs(category);
-      if (_getCategoryRefs(category) == 0) {
-        _categories.remove(category);
-      }
     });
+    _categories.removeWhere((_, refs) => refs == 0);
   }
 
   void _decrementCategoryRefs(String category) {
