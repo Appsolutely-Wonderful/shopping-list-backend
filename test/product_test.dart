@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ShoppingListBackend/src/product.dart';
 import 'package:test/test.dart';
 
@@ -34,5 +36,19 @@ void main() {
 
     var categories = newProduct.getCategories();
     expect(categories, ["Category 1", "Category 3"]);
+  });
+
+  test('Product can be encoded and decoded through json', () {
+    Product newProduct =
+        Product(name: "product", quantity: 4, price: 1.0, recipe: "Test");
+
+    var json = jsonEncode(newProduct);
+
+    Product reconstructedProduct = Product.fromJson(jsonDecode(json));
+
+    expect(reconstructedProduct.name, newProduct.name);
+    expect(reconstructedProduct.quantity, newProduct.quantity);
+    expect(reconstructedProduct.price, newProduct.price);
+    expect(reconstructedProduct.recipe, newProduct.recipe);
   });
 }
