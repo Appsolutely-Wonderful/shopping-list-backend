@@ -14,7 +14,7 @@ class ShoppingList {
   /// Used to track the current categories of items in the list
   Map<String, int> _categories = {};
 
-  ShoppingList();
+  ShoppingList({String name}) : this._name = name;
 
   factory ShoppingList.fromJson(Map<String, dynamic> json) =>
       _$ShoppingListFromJson(json);
