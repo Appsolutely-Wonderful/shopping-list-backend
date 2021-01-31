@@ -7,7 +7,7 @@ class Product {
   String name = "";
   String recipe = "";
   String unit = "";
-  int quantity = 1;
+  double quantity = 1;
   double price = 0.00;
 
   bool _checked = false;
