@@ -1,7 +1,11 @@
 import 'package:ShoppingListBackend/src/product.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'shopping_list.g.dart';
 
 typedef ForEachCallback = void Function(Product item);
 
+@JsonSerializable(nullable: false)
 class ShoppingList {
   String _name;
   List<Product> _items = [];
